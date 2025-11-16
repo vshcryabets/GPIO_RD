@@ -59,7 +59,9 @@ int main()
         }
 
         // Toggle the line state
-        for (int i = 0; i < 1000000; i++)
+	constexpr uint64_t max = 10000000;
+	std::cout << "Send " << max << " ticks" << std::endl;
+        for (uint64_t i = 0; i < max; i++)
         {
             gpiod_line_value value = (i % 2) ? GPIOD_LINE_VALUE_ACTIVE : GPIOD_LINE_VALUE_INACTIVE;
             gpiod_line_request_set_value(request, pinId, value);
