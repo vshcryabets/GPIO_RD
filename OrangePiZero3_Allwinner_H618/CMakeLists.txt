@@ -5,6 +5,9 @@ include_directories(include)
 add_executable(TestMmapGPIOAccess
     src/testMmapGpio.cpp)
 
+add_executable(TestMmapGPIOAccess_throughput
+    src/testMmapGpio_throughput.cpp)
+
 add_executable(TestSysClassGPIOAccess
     src/testSysClassGpio.cpp)
 
