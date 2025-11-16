@@ -11,6 +11,9 @@ add_executable(TestMmapGPIOAccess_throughput
 add_executable(TestSysClassGPIOAccess
     src/testSysClassGpio.cpp)
 
+add_executable(TestSysClassGPIOAccess_throughput
+    src/testSysClassGpio_throughput.cpp)
+
 if (USE_LIBGPIOD2)
     message(STATUS "Building with libgpiod v2 support")
     find_package(PkgConfig REQUIRED)
