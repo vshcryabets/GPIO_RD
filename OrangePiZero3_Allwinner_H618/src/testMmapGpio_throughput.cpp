@@ -24,20 +24,19 @@ int main() {
     void* map_base = mmap(
         nullptr,
         PAGE_SIZE,
-        PROT_READ | PROT_WRITE,  // нам потрібен доступ на читання і запис
+        PROT_READ | PROT_WRITE,  // we need both read and write permissions
         MAP_SHARED,          
         mem_fd,              
-        PIO_BASE_ADDR // фізична адреса (має бути вирівняна по розміру сторінки 4Kb)
+        PIO_BASE_ADDR // physical address (must be aligned to page size 4Kb)
     );
-    close(mem_fd); // дескриптор файлу більше не потрібен після mmap
+    close(mem_fd); // file descriptor is no longer needed after mmap
 
     if (map_base == MAP_FAILED) {
         std::cerr << "mmap error: " << strerror(errno) << std::endl;
         return 1;
     }
     
-    // volatile щоб компілятор не кешував значення регістру і завжди 
-    // виконував реальне читання/запис.
+    // volatile to prevent the compiler from caching the register value
     volatile uint32_t* reg32_ptr = (volatile uint32_t*)map_base;
 
     uint32_t pin_port = static_cast<uint8_t>(PIN_PORT);

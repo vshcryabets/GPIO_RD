@@ -39,7 +39,7 @@ int main()
         }
         gpiod_line_config_add_line_settings(line_config, &pinId, 1, line_settings);
 
-        // Створюємо конфіг для запиту
+        // create new request config and set consumer
         req_config = gpiod_request_config_new();
         if (!req_config)
         {
@@ -48,9 +48,9 @@ int main()
         }
         gpiod_request_config_set_consumer(req_config, "my-blink-app");
 
-        // Запитуємо лінію(ї)
+        // request the line with the specified config
         request = gpiod_chip_request_lines(chip, req_config, line_config);
-        // Звільняємо конфіг запиту, він більше не потрібен
+        // Free the request config, it's no longer needed
         gpiod_request_config_free(req_config);
         if (!request)
         {
